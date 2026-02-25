@@ -1,0 +1,30 @@
+services:
+  node-api:
+    build:
+      context: ./node-api
+    container_name: node-api
+    ports:
+      - "3000:3000"
+
+  go-api:
+    build:
+      context: ./go-api
+    container_name: go-api
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - NODE_API_URL=http://node-api:3000
+    depends_on:
+      - node-api
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        - VITE_GO_API_BASE=http://go-api:8080
+    container_name: frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - go-api

@@ -1,0 +1,59 @@
+# --- General ---
+.DS_Store
+Thumbs.db
+*.log
+logs/
+*.tmp
+*.swp
+*.swo
+*.orig
+*.bak
+
+# Editor / IDE
+.vscode/
+.idea/
+*.iml
+
+# Node / TypeScript (frontend, node-api)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+dist/
+build/
+coverage/
+storybook-static/
+
+# Vite / React
+*.tsbuildinfo
+.vite/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Go (go-api)
+go-api/bin/
+go-api/build/
+go-api/dist/
+go-api/*.exe
+go-api/*.out
+
+# TypeScript build outputs
+node-api/dist/
+frontend/dist/
+
+# OS / misc
+*.DS_Store
+*.local
+
+# Cursor / tooling
+.cursor/
+.python-version
+
