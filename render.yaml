@@ -9,8 +9,8 @@ services:
   - type: web
     name: node-api
     runtime: docker
-    dockerContext: .
-    dockerfilePath: node-api/Dockerfile
+    dockerContext: node-api
+    dockerfilePath: Dockerfile
     envVars:
       - key: PORT
         value: 3000
@@ -20,8 +20,8 @@ services:
   - type: web
     name: go-api
     runtime: docker
-    dockerContext: .
-    dockerfilePath: go-api/Dockerfile
+    dockerContext: go-api
+    dockerfilePath: Dockerfile
     envVars:
       - key: PORT
         value: 8080
