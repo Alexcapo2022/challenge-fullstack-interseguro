@@ -36,11 +36,11 @@ services:
         value: "*"
 
   # 🎨 Frontend (Static Site)
-  - type: static_site
+  - type: web
     name: matrix-frontend
-    runtime: node
+    runtime: static
     buildCommand: npm install && npm run build
-    publishDir: ./frontend/dist
+    staticPublishPath: ./frontend/dist
     envVars:
       - key: VITE_GO_API_BASE
         fromService:
