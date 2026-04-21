@@ -6,8 +6,8 @@ interface Props {
 }
 
 export function LoginPage({ onLogin }: Props) {
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("admin123");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -20,7 +20,7 @@ export function LoginPage({ onLogin }: Props) {
       localStorage.setItem("token", token);
       onLogin(token);
     } catch (err: any) {
-      setError("Credenciales inválidas. Intenta admin/admin123");
+      setError("Credenciales inválidas");
     } finally {
       setLoading(false);
     }
@@ -80,9 +80,7 @@ export function LoginPage({ onLogin }: Props) {
           </button>
         </form>
 
-        <div className="mt-8 text-center text-xs text-slate-500">
-          Usa las credenciales: <b>admin / admin123</b>
-        </div>
+
       </div>
     </div>
   );
