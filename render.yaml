@@ -1,0 +1,49 @@
+services:
+  # 🟢 Node API (Estadísticas)
+  - type: web
+    name: node-api
+    runtime: docker
+    dockerContext: ./node-api
+    dockerfilePath: ./node-api/Dockerfile
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        generateValue: true
+
+  # 🔵 Go API (Cálculo QR y Rotación)
+  - type: web
+    name: go-api
+    runtime: docker
+    dockerContext: ./go-api
+    dockerfilePath: ./go-api/Dockerfile
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: NODE_API_URL
+        fromService:
+          type: web
+          name: node-api
+          property: host
+      - key: JWT_SECRET
+        fromService:
+          type: web
+          name: node-api
+          property: envVar
+          envVar: JWT_SECRET
+      - key: ALLOWED_ORIGIN
+        # Esto se actualizará automáticamente una vez desplegado el front
+        value: "*"
+
+  # 🎨 Frontend (Static Site)
+  - type: static
+    name: matrix-frontend
+    runtime: node
+    buildCommand: npm install && npm run build
+    publishDir: ./frontend/dist
+    envVars:
+      - key: VITE_GO_API_BASE
+        fromService:
+          type: web
+          name: go-api
+          property: host

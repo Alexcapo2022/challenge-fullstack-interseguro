@@ -48,6 +48,24 @@ docker compose up --build
 - **Health Check Go**: `http://localhost:8080/health`
 - **Health Check Node**: `http://localhost:3000/health`
 
+---
+
+## ☁️ Despliegue en la Nube (Render)
+
+Este proyecto está listo para ser desplegado en **Render** usando **Blueprints**. Solo necesitas:
+
+1.  Conectar tu repositorio de GitHub a Render.
+2.  Render detectará automáticamente el archivo `render.yaml`.
+3.  Aprobar el despliegue.
+
+**Configuraciones automáticas realizadas:**
+- Orquestación de los 3 servicios.
+- Generación automática de secretos.
+- Comunicación interna optimizada.
+- Puertos dinámicos configurados.
+
+---
+
 ### Credenciales de Prueba:
 - **Usuario**: `admin`
 - **Contraseña**: `admin123`

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -20,21 +21,32 @@ import (
 func main() {
 	cfg := config.Load()
 
+	// 🌐 Puerto dinámico para Render
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = cfg.Port
+	}
+
 	app := fiber.New(fiber.Config{
 		ErrorHandler: middlewares.ErrorHandler,
 	})
 
 	app.Use(recover.New())
 
-	// ✅ CORS
+	// ✅ CORS dinámico
+	allowedOrigin := os.Getenv("ALLOWED_ORIGIN")
+	if allowedOrigin == "" {
+		allowedOrigin = "http://localhost:5173,http://127.0.0.1:5173"
+	}
+
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:5173,http://127.0.0.1:5173",
+		AllowOrigins: allowedOrigin,
 		AllowMethods: "GET,POST,PUT,DELETE,OPTIONS",
 		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
 	}))
 
 	routes.Register(app, cfg)
 
-	log.Printf("Go API running on :%s (NODE_API_URL=%s)\n", cfg.Port, cfg.NodeApiURL)
-	_ = app.Listen(":" + cfg.Port)
+	log.Printf("Go API ejecutándose en puerto :%s\n", port)
+	_ = app.Listen(":" + port)
 }
