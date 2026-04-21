@@ -43,7 +43,4 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_GO_API_BASE
-        fromService:
-          type: web
-          name: go-api
-          property: host
+        value: https://go-api-2wt7.onrender.com
