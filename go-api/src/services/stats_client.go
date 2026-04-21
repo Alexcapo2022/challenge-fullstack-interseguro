@@ -14,8 +14,14 @@ type StatsClient struct {
 }
 
 func NewStatsClient(baseURL string) *StatsClient {
+	// Asegurar protocolo para comunicación interna en Render
+	finalURL := baseURL
+	if baseURL != "" && baseURL[:4] != "http" {
+		finalURL = "http://" + baseURL
+	}
+
 	return &StatsClient{
-		baseURL: baseURL,
+		baseURL: finalURL,
 		client:  &http.Client{Timeout: 10 * time.Second},
 	}
 }

@@ -29,7 +29,7 @@ services:
         fromService:
           type: web
           name: node-api
-          property: host
+          property: hostport
       - key: ALLOWED_ORIGIN
         value: "*"
       - fromGroup: matrix-shared-secrets
