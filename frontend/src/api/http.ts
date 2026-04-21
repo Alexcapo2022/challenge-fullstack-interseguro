@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const rawBaseUrl = import.meta.env.VITE_GO_API_BASE || "http://localhost:8080";
+const apiBaseUrl = rawBaseUrl.startsWith("http") ? rawBaseUrl : `https://${rawBaseUrl}`;
+
 export const http = axios.create({
-  baseURL: import.meta.env.VITE_GO_API_BASE || "http://localhost:8080",
+  baseURL: apiBaseUrl,
   timeout: 10000,
   headers: { "Content-Type": "application/json" },
 });
