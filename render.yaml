@@ -38,8 +38,9 @@ services:
   - type: web
     name: matrix-frontend
     runtime: static
+    rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_GO_API_BASE
         fromService:
