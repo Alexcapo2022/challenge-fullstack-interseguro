@@ -9,5 +9,5 @@ type RotateService interface {
 }
 
 type StatsClient interface {
-	GetStats(matrices map[string][][]float64) (map[string]interface{}, error)
+	GetStats(matrices map[string][][]float64, token string) (map[string]interface{}, error)
 }

@@ -17,7 +17,7 @@ func (s *QRService) ComputeQR(matrix [][]float64) ([][]float64, [][]float64, err
 		return nil, nil, err
 	}
 	if rows < cols {
-		return nil, nil, fmt.Errorf("invalid matrix: rows (%d) must be >= cols (%d)", rows, cols)
+		return nil, nil, fmt.Errorf("matriz inválida: las filas (%d) deben ser >= a las columnas (%d)", rows, cols)
 	}
 
 	data := utils.Flatten(matrix) // si ya lo tienes; si no, te lo paso

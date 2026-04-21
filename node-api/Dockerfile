@@ -5,8 +5,13 @@ COPY package.json ./
 RUN npm install
 
 COPY tsconfig.json ./
+COPY jest.config.js ./
 COPY src ./src
 
+# 3) Ejecutamos tests
+RUN npm test
+
+# 4) Compilamos
 RUN npm run build
 
 FROM node:20-alpine

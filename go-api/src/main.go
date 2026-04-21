@@ -11,6 +11,12 @@ import (
 	"go-api/src/routes"
 )
 
+// @title Interseguro Matrix Challenge API
+// @version 1.0
+// @description API para manipular matrices y calcular estadísticas.
+// @securityDefinitions.apikey Bearer
+// @in header
+// @name Authorization
 func main() {
 	cfg := config.Load()
 

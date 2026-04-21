@@ -29,13 +29,13 @@ func (s *RotateService) Rotate(matrix [][]float64, degrees int, direction string
 	direction = strings.ToLower(direction)
 
 	if direction != "cw" && direction != "ccw" {
-		return nil, errors.New("direction must be 'cw' or 'ccw'")
+		return nil, errors.New("la dirección debe ser 'cw' (horario) o 'ccw' (antihorario)")
 	}
 
 	switch degrees {
 	case 90, 180, 270:
 	default:
-		return nil, errors.New("degrees must be 90, 180, or 270")
+		return nil, errors.New("los grados deben ser 90, 180 o 270")
 	}
 
 	// normalize ccw -> cw
@@ -55,6 +55,6 @@ func (s *RotateService) Rotate(matrix [][]float64, degrees int, direction string
 	case 270:
 		return utils.Rotate270CW(matrix), nil
 	default:
-		return nil, errors.New("unsupported rotation")
+		return nil, errors.New("rotación no soportada")
 	}
 }

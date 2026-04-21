@@ -11,7 +11,14 @@ COPY src ./src
 # 3) Ahora sí: descarga deps y genera go.sum automáticamente
 RUN go mod tidy
 
-# 4) Compilamos
+# 4) Generamos documentación Swagger
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+RUN /go/bin/swag init -g src/main.go -o src/docs
+
+# 5) Ejecutamos tests
+RUN go test -v ./src/...
+
+# 6) Compilamos
 RUN go build -o server ./src/main.go
 
 FROM alpine:3.20

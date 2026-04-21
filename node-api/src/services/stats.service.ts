@@ -7,7 +7,7 @@ type MatricesPayload = Record<string, Matrix>;
 export function buildStatsResponse(matrices: unknown): StatsResponse {
   if (!matrices || typeof matrices !== "object") {
     const e = new Error(
-      "Body inválido. Se espera { matrices: { nombre: number[][], ... } }"
+      "Cuerpo de la petición inválido. Se espera { matrices: { nombre: number[][], ... } }"
     ) as HttpError;
     e.status = 400;
     throw e;

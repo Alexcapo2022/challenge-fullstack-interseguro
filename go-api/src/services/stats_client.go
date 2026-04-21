@@ -24,7 +24,7 @@ type nodeStatsRequest struct {
 	Matrices map[string][][]float64 `json:"matrices"`
 }
 
-func (sc *StatsClient) GetStats(matrices map[string][][]float64) (map[string]interface{}, error) {
+func (sc *StatsClient) GetStats(matrices map[string][][]float64, token string) (map[string]interface{}, error) {
 	body, err := json.Marshal(nodeStatsRequest{Matrices: matrices})
 	if err != nil {
 		return nil, err
@@ -35,6 +35,9 @@ func (sc *StatsClient) GetStats(matrices map[string][][]float64) (map[string]int
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
+	if token != "" {
+		req.Header.Set("Authorization", token)
+	}
 
 	resp, err := sc.client.Do(req)
 	if err != nil {
