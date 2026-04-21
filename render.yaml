@@ -1,3 +1,9 @@
+envVarGroups:
+  - name: matrix-shared-secrets
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+
 services:
   # 🟢 Node API (Estadísticas)
   - type: web
@@ -8,8 +14,8 @@ services:
     envVars:
       - key: PORT
         value: 3000
-      - key: JWT_SECRET
-        generateValue: true
+    envVarGroups:
+      - name: matrix-shared-secrets
 
   # 🔵 Go API (Cálculo QR y Rotación)
   - type: web
@@ -25,15 +31,10 @@ services:
           type: web
           name: node-api
           property: host
-      - key: JWT_SECRET
-        fromService:
-          type: web
-          name: node-api
-          property: envVar
-          envVar: JWT_SECRET
       - key: ALLOWED_ORIGIN
-        # Esto se actualizará automáticamente una vez desplegado el front
         value: "*"
+    envVarGroups:
+      - name: matrix-shared-secrets
 
   # 🎨 Frontend (Static Site)
   - type: web
