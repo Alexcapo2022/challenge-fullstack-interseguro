@@ -14,8 +14,8 @@ services:
     envVars:
       - key: PORT
         value: 3000
-    envVarGroups:
-      - name: matrix-shared-secrets
+      - fromGroup:
+          name: matrix-shared-secrets
 
   # 🔵 Go API (Cálculo QR y Rotación)
   - type: web
@@ -33,8 +33,8 @@ services:
           property: host
       - key: ALLOWED_ORIGIN
         value: "*"
-    envVarGroups:
-      - name: matrix-shared-secrets
+      - fromGroup:
+          name: matrix-shared-secrets
 
   # 🎨 Frontend (Static Site)
   - type: web
